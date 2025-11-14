@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,22 +6,67 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  TextInput,
 } from "react-native";
+import MapView, { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 export default function FoodNearby({ navigation }) {
+  const [coords, setCoords] = useState(null)
+
+  const getLocation = async () => {
+    try {
+      // // Need permission first to get user location
+      // const position = await Location.getCurrentPositionAsync({
+      //   accuracy: Location.Accuracy.Highest,
+      //   maximumAge: 1000,
+      // });
+      // const {latitude, longitude} = position.coords;
+
+      // default location is new york
+      const latitude = 40.7128;
+      const longitude = -74.0060;
+
+      setCoords({ latitude, longitude });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getLocation();
+  }, [])
+
   return (
     <ScrollView style={styles.container}>
-      {/* Map Section */}
-      <View style={styles.mapContainer}>
-        <View style={styles.map}>
-          {/* Map pins represented as colored circles */}
-          <View style={[styles.pin, styles.pin1]} />
-          <View style={[styles.pin, styles.pin2]} />
-          <View style={[styles.pin, styles.pin3]} />
-          <View style={[styles.pin, styles.pin4]} />
-          <View style={[styles.pin, styles.pin5]} />
-        </View>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
+        <TouchableOpacity>
+          <Text>Map</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text>List</Text>
+        </TouchableOpacity>
       </View>
+
+      <TextInput
+        placeholder="Search for a location"
+      />
+
+      {coords && (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            latitudeDelta: 0.08,
+            longitudeDelta: 0.04,
+          }}
+        >
+          <Marker coordinate={coords} />
+        </MapView>
+      )}
+
 
       {/* Content Section */}
       <View style={styles.content}>
@@ -89,10 +134,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   map: {
-    flex: 1,
+    height: 300,
+    width: '100%',
     backgroundColor: "#F0EDE5",
     borderRadius: 8,
-    position: "relative",
     borderWidth: 1,
     borderColor: "#DDD",
   },
