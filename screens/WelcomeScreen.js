@@ -9,6 +9,10 @@ export default function WelcomeScreen({ navigation }) {
         title="Go to Favorites"
         onPress={() => navigation.navigate("Favorites")}
       />
+      <Button
+        title="Find Food Nearby"
+        onPress={() => navigation.navigate("FoodNearby")}
+      />
     </View>
   );
 }
