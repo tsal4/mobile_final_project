@@ -13,6 +13,10 @@ export default function WelcomeScreen({ navigation }) {
         title="Find Food Nearby"
         onPress={() => navigation.navigate("FoodNearby")}
       />
+      <Button
+        title="Location Permission"
+        onPress={() => navigation.navigate("LocationPermission")}
+      />
     </View>
   );
 }

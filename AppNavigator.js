@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Favorites from "./screens/myFavoriteResources";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import FoodNearby from "./screens/FoodNearby";
+import LocationPermission from "./screens/LocationPermission";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="FoodNearby" component={FoodNearby} />
+        <Stack.Screen name="LocationPermission" component={LocationPermission} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
