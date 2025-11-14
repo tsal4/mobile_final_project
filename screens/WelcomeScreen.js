@@ -21,6 +21,10 @@ export default function WelcomeScreen({ navigation }) {
         title="Find Food Nearby"
         onPress={() => navigation.navigate("FoodNearby")}
       />
+      <Button
+        title="Filter Results"
+        onPress={() => navigation.navigate("FilterResults")}
+      />
       <TouchableOpacity onPress={() => navigation.navigate("LocationPermission")} style={styles.button}>
         <Text style={styles.buttonText}>{"Get Started"}</Text>
       </TouchableOpacity>
