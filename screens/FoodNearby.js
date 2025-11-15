@@ -38,7 +38,7 @@ export default function FoodNearby({ navigation }) {
   }, [])
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
         <TouchableOpacity>
@@ -67,59 +67,12 @@ export default function FoodNearby({ navigation }) {
         </MapView>
       )}
 
-
-      {/* Content Section */}
-      <View style={styles.content}>
-        <Text style={styles.heading}>Find Food Nearby</Text>
-        <Text style={styles.description}>
-          To show you the closest food pantries, soup kitchens, and other
-          resources, we need to know your location.
-        </Text>
-
-        {/* Feature Card 1 */}
-        <View style={styles.card}>
-          <View style={styles.iconContainer}>
-            <Text style={styles.icon}>📍</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardTitle}>
-              Discover food resources closest to you.
-            </Text>
-            <TouchableOpacity>
-              <Text style={styles.cardLink}>Find nearby food banks</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Feature Card 2 */}
-        <View style={styles.card}>
-          <View style={styles.iconContainer}>
-            <Text style={styles.icon}>🧭</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <Text style={styles.cardTitle}>
-              Get walking, driving, or transit directions.
-            </Text>
-            <TouchableOpacity>
-              <Text style={styles.cardLink}>Directions to your destination</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Action Buttons */}
-        <TouchableOpacity style={styles.primaryButton}>
-          <Text style={styles.primaryButtonText}>Allow Location Access</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.secondaryLink}>
-          <Text style={styles.secondaryLinkText}>Maybe Later</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.tertiaryLink}>
-          <Text style={styles.tertiaryLinkText}>Learn More</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
+        <TouchableOpacity onPress={() => navigation.navigate('FilterResults')}>
+          <Text>Filter</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -134,7 +87,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   map: {
-    height: 300,
+    height: 500,
     width: '100%',
     backgroundColor: "#F0EDE5",
     borderRadius: 8,

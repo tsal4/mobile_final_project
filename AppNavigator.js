@@ -7,6 +7,7 @@ import WelcomeScreen from "./screens/WelcomeScreen";
 import FoodNearby from "./screens/FoodNearby";
 import LocationPermission from "./screens/LocationPermission";
 import FilterResults from "./screens/FilterResults";
+import ResourceDetails from "./screens/ResourceDetails";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="FoodNearby" component={FoodNearby} />
+        <Stack.Screen name="ResourceDetails" component={ResourceDetails} options={{ headerShown: false }} />
         <Stack.Screen name="LocationPermission" component={LocationPermission} options={{ headerShown: false }} />
         <Stack.Screen name="FilterResults" component={FilterResults} options={{ headerShown: false }} />
       </Stack.Navigator>
