@@ -5,6 +5,7 @@ Resource Object:
 
 {
     id: Null,
+    Name: "",
     Address: "",
     OperatingHours: {
         Monday: "",
