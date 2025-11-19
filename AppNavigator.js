@@ -15,7 +15,7 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="FoodNearby" component={FoodNearby} />
         <Stack.Screen name="ResourceDetails" component={ResourceDetails} options={{ headerShown: false }} />

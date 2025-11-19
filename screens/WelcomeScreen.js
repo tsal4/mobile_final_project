@@ -8,7 +8,7 @@ export default function WelcomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo_placeholder.jpg')} style={styles.image} />
+      <Image source={require('../assets/NourishNet.png')} style={styles.image} />
       <Text style={styles.bigText}>Welcome to NourishNet!</Text>
       <Text style={styles.description}>
         NourishNet is your guide to finding food assistance in your area. Press the Get Started button to enable your location and start finding food assistance near you.
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     resizeMode: 'cover',
   },
   button: {
