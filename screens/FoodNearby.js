@@ -16,20 +16,29 @@ export default function FoodNearby({ navigation }) {
 
   const getLocation = async () => {
     try {
-      // // Need permission first to get user location
-      // const position = await Location.getCurrentPositionAsync({
-      //   accuracy: Location.Accuracy.Highest,
-      //   maximumAge: 1000,
-      // });
-      // const {latitude, longitude} = position.coords;
-
-      // default location is new york
+      // Check if we have permission
+      const { status } = await Location.getForegroundPermissionsAsync();
+      
+      if (status === 'granted') {
+        // Get user's actual location
+        const position = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Highest,
+          maximumAge: 1000,
+        });
+        const {latitude, longitude} = position.coords;
+        setCoords({ latitude, longitude });
+      } else {
+        // Default location is New York if permission not granted
+        const latitude = 40.7128;
+        const longitude = -74.0060;
+        setCoords({ latitude, longitude });
+      }
+    } catch (error) {
+      console.log(error);
+      // Fallback to default location on error
       const latitude = 40.7128;
       const longitude = -74.0060;
-
       setCoords({ latitude, longitude });
-    } catch (error) {
-      console.log(error)
     }
   }
 

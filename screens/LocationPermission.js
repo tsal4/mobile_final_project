@@ -1,7 +1,62 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import * as Location from 'expo-location';
 
 export default function LocationPermission({ navigation }) {
+  const [isRequesting, setIsRequesting] = useState(false);
+
+  const handleAllowLocation = async () => {
+    setIsRequesting(true);
+    try {
+      // Request foreground location permissions
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status === 'granted') {
+        // Permission granted - go back to previous screen to preserve back animation
+        Alert.alert(
+          'Success!',
+          'Location access enabled. You can now find food resources near you.',
+          [
+            {
+              text: 'OK',
+              onPress: () => navigation.goBack()
+            }
+          ]
+        );
+      } else {
+        // Permission denied - go back to previous screen to preserve back animation
+        Alert.alert(
+          'Permission Denied',
+          'Location access is required to find food resources near you. You can enable it later in your device settings.',
+          [
+            {
+              text: 'OK',
+              onPress: () => navigation.goBack()
+            }
+          ]
+        );
+      }
+    } catch (error) {
+      console.error('Error requesting location permission:', error);
+      Alert.alert(
+        'Error',
+        'Something went wrong. Please try again.',
+        [
+          {
+            text: 'OK'
+          }
+        ]
+      );
+    } finally {
+      setIsRequesting(false);
+    }
+  };
+
+  const handleMaybeLater = () => {
+    // Navigate back to welcome screen without requesting permission
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
       {/* Back button */}
@@ -32,11 +87,21 @@ export default function LocationPermission({ navigation }) {
 
       {/* Bottom Buttons */}
       <View style={styles.bottomContainer}>
-        <TouchableOpacity style={styles.allowButton}>
-          <Text style={styles.allowButtonText}>Allow Location</Text>
+        <TouchableOpacity 
+          style={[styles.allowButton, isRequesting && styles.allowButtonDisabled]}
+          onPress={handleAllowLocation}
+          disabled={isRequesting}
+        >
+          <Text style={styles.allowButtonText}>
+            {isRequesting ? 'Requesting...' : 'Allow Location'}
+          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.maybeLaterButton}>
+        <TouchableOpacity 
+          style={styles.maybeLaterButton}
+          onPress={handleMaybeLater}
+          disabled={isRequesting}
+        >
           <Text style={styles.maybeLaterText}>Maybe later</Text>
         </TouchableOpacity>
       </View>
@@ -121,6 +186,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: "center",
     marginBottom: 20,
+  },
+  allowButtonDisabled: {
+    backgroundColor: "#E8A5A3",
   },
   allowButtonText: {
     color: "#FFFFFF",
